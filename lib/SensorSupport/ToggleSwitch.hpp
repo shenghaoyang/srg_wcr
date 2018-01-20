@@ -38,8 +38,30 @@ public:
 		Bounce {} {
 		pinMode(pin, pinmode);
 		Bounce::interval(interval);
+    delay(1);
 		Bounce::attach(pin);
 	}
+
+  /*!
+   * \brief Sets up a new debouncer for a toggle switch, using another pin
+   * to provide the reference signal for this switch.
+   *
+   * \param[in] pin pin the toggle switch input is connected to
+   * \param[in] ref_pin pin the other lead of the toggle switch is connected to
+   * \param[in] ref_state the state the reference pin of the toggle switch
+   * should be in.
+   * \param[in] interval debounce time constant in milliseconds
+   */
+  ToggleSwitch(uint8_t pin, uint8_t ref_pin, uint8_t ref_state,
+               uint16_t interval):
+    Bounce {} {
+    pinMode(pin, INPUT_PULLDOWN);
+    pinMode(ref_pin, ref_state);
+    digitalWrite(ref_pin, 1);
+    Bounce::interval(interval);
+    delay(10);
+    Bounce::attach(pin);
+  }
 
 	/*!
 	 * \brief Updates the state machine handling the debouncing of the toggle
@@ -72,6 +94,12 @@ public:
 		return EdgeType::EDGE_NONE;
 	}
 
+	void wait_edge(EdgeType typ) {
+		do {
+			update();
+		} while (edge() != typ);
+	}
+
 	/*!
 	 * \brief Returns the state of the switch, as processed by the debounce
 	 * algorithm.
@@ -82,7 +110,7 @@ public:
 	 * \retval true the switch input state is high
 	 * \retval false the switch input state is low
 	 */
-	bool operator()() {
+	operator bool() {
 		return Bounce::read();
 	}
 
