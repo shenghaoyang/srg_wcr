@@ -11,6 +11,56 @@
 #include <RobotConstants.hpp>
 #include <Arduino.h>
 
+namespace StatesTest {
+	using namespace RobotConstants;
+	using namespace StateMachine;
+
+	StateStatus state_A(RobotState& rstate, bool first_run) {
+		if (first_run) {
+			Serial.printf("State A: first run\n");
+			return StateStatus::REPEAT;
+		} else {
+			Serial.printf("State A: non-first run\n");
+			Serial.printf("State A: transitioning now to state B\n");
+			return StateStatus::NEXT;
+		}
+		return StateStatus::ABORT;
+	}
+
+	StateStatus state_B(RobotState& rstate, bool first_run) {
+		static elapsedMillis state_time {};
+		if (first_run) {
+			Serial.printf("State B: first run\n");
+			state_time = elapsedMillis {};
+			return StateStatus::REPEAT;
+		} else {
+			if (state_time < 10000) {
+				Serial.printf("State B: sensor readings: %u mm\n", rstate.range_readings[0]);
+				delay(20);
+			} else {
+				Serial.printf("State B: transitioning now to state C via a ABORT jump");
+				return StateStatus::ABORT;
+			}
+		}
+		return StateStatus::ABORT;
+	}
+
+	StateStatus state_C(RobotState& rstate, bool first_run) {
+		if (first_run) {
+			Serial.printf("State C: first run\n");
+			Serial.printf("State C: a state machine break message should be seen next\n");
+			Serial.printf("State C: because the state table doesn't have an entry for this state");
+			return StateStatus::REPEAT;
+		} else {
+			Serial.printf("State C: second run\n");
+			Serial.printf("State C: YOU SHOULD NOT BE SEEING THIS!?!@#1111");
+			return StateStatus::ABORT;
+		}
+	}
+
+
+}
+
 
 namespace States {
 	using namespace RobotConstants;

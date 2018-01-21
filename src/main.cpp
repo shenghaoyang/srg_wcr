@@ -52,7 +52,6 @@ void setup() {
 	delay(100);
 	range_sensors[RobotConstants::RS_FRONT_LEFT].init();
 	range_sensors[RobotConstants::RS_FRONT_LEFT].startContinuous();
-
 	shutoff.wait_edge(ToggleSwitch::EdgeType::EDGE_RISING);
 	for (uint8_t i = 1; i <= 10; i++) {
 		shutoff.update();
@@ -64,7 +63,7 @@ void setup() {
 
 
 	/* Setup variables associated with the state machine */
-	StateFunction curstate { States::start };
+	StateFunction curstate { StatesTest::start };
 	StateFunction newstate;
 	StateStatus status;
 	RobotState rstate {
@@ -73,6 +72,7 @@ void setup() {
 		{ 0, 0 }
 	};
 	bool first_run { true };
+	Serial.printf("Main thread: starting state machine");
 	while (!shutoff) {
 		/*
 		 * Run the state machine, resetting the first_run variable if
@@ -86,7 +86,7 @@ void setup() {
 		 * state is not the current state
 		 */
 		if(!(newstate
-				= lookup_transition(curstate, status, States::StateTable)))
+				= lookup_transition(curstate, status, StatesTest::StateTable)))
 			/* No state looked up, commit to exit state */
 			break;
 		first_run = (newstate == curstate) ? false : true;
@@ -120,6 +120,7 @@ void setup() {
 			}
 		}
 	}
+	Serial.printf("Main thread: state machine destroyed\n");
 
 	/* Put system into safe state */
 	for (uint8_t i = 0; i < 3; i++) {

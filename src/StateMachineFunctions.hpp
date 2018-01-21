@@ -12,7 +12,22 @@
 
 #include <StateMachine.hpp>
 
+namespace StatesTest {
+	using namespace StateMachine;
 
+	StateStatus state_A(RobotState& rstate, bool first_run);
+
+	StateStatus state_B(RobotState& rstate, bool first_run);
+
+	StateStatus state_C(RobotState& rstate, bool first_run);
+
+	constexpr StateFunction start = state_A;
+	constexpr StateTransitionTargets StateTable[] = {
+			{ state_A, state_B, nullptr },
+			{ state_B, nullptr, state_C },
+			{ nullptr, nullptr, nullptr }
+	};
+}
 
 namespace States {
 	using namespace StateMachine;
