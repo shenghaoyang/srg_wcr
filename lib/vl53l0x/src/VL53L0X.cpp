@@ -279,7 +279,7 @@ bool VL53L0X::init(bool io_2v8)
 }
 
 // Write an 8-bit register
-void VL53L0X::writeReg(uint8_t reg, uint8_t value)
+void VL53L0X::writeReg(uint8_t reg, uint8_t value, uint32_t timeout)
 {
   Wire.beginTransmission(address);
   Wire.write(reg);
@@ -288,7 +288,7 @@ void VL53L0X::writeReg(uint8_t reg, uint8_t value)
 }
 
 // Write a 16-bit register
-void VL53L0X::writeReg16Bit(uint8_t reg, uint16_t value)
+void VL53L0X::writeReg16Bit(uint8_t reg, uint16_t value, uint32_t timeout)
 {
   Wire.beginTransmission(address);
   Wire.write(reg);
@@ -298,7 +298,7 @@ void VL53L0X::writeReg16Bit(uint8_t reg, uint16_t value)
 }
 
 // Write a 32-bit register
-void VL53L0X::writeReg32Bit(uint8_t reg, uint32_t value)
+void VL53L0X::writeReg32Bit(uint8_t reg, uint32_t value, uint32_t timeout)
 {
   Wire.beginTransmission(address);
   Wire.write(reg);
@@ -310,7 +310,7 @@ void VL53L0X::writeReg32Bit(uint8_t reg, uint32_t value)
 }
 
 // Read an 8-bit register
-uint8_t VL53L0X::readReg(uint8_t reg)
+uint8_t VL53L0X::readReg(uint8_t reg, uint32_t timeout)
 {
   uint8_t value;
 
@@ -325,7 +325,7 @@ uint8_t VL53L0X::readReg(uint8_t reg)
 }
 
 // Read a 16-bit register
-uint16_t VL53L0X::readReg16Bit(uint8_t reg)
+uint16_t VL53L0X::readReg16Bit(uint8_t reg, uint32_t timeout)
 {
   uint16_t value;
 
@@ -341,7 +341,7 @@ uint16_t VL53L0X::readReg16Bit(uint8_t reg)
 }
 
 // Read a 32-bit register
-uint32_t VL53L0X::readReg32Bit(uint8_t reg)
+uint32_t VL53L0X::readReg32Bit(uint8_t reg, uint32_t timeout)
 {
   uint32_t value;
 

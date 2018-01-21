@@ -19,7 +19,7 @@ class EDFMotor: public UniPWMMotor {
 private:
 	uint8_t ctrl_0;		 ///< Motor control pin
 	float cur_pow {0.f}; ///< Current motor power
-	static constexpr uint16_t max_duty {65535}; ///< Maximum duty cycle for \ref analogWrite
+	static constexpr uint16_t max_duty {65535}; ///< Maximum duty cycle for \ref analogWrite()
 public:
 	/*!
 	 * \brief Constructor for the EDFMotor motor class.

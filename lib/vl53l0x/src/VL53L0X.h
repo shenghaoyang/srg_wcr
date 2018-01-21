@@ -103,12 +103,12 @@ class VL53L0X
 
     bool init(bool io_2v8 = true);
 
-    virtual void writeReg(uint8_t reg, uint8_t value);
-    virtual void writeReg16Bit(uint8_t reg, uint16_t value);
-    virtual void writeReg32Bit(uint8_t reg, uint32_t value);
-    virtual uint8_t readReg(uint8_t reg);
-    virtual uint16_t readReg16Bit(uint8_t reg);
-    virtual uint32_t readReg32Bit(uint8_t reg);
+    virtual void writeReg(uint8_t reg, uint8_t value, uint32_t timeout=0);
+    virtual void writeReg16Bit(uint8_t reg, uint16_t value, uint32_t timeout=0);
+    virtual void writeReg32Bit(uint8_t reg, uint32_t value, uint32_t timeout=0);
+    virtual uint8_t readReg(uint8_t reg, uint32_t timeout=0);
+    virtual uint16_t readReg16Bit(uint8_t reg, uint32_t timeout=0);
+    virtual uint32_t readReg32Bit(uint8_t reg, uint32_t timeout=0);
 
     virtual void writeMulti(uint8_t reg, uint8_t const * src, uint8_t count);
     virtual void readMulti(uint8_t reg, uint8_t * dst, uint8_t count);

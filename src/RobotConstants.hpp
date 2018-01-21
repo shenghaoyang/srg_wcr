@@ -10,6 +10,11 @@
 #ifndef ROBOTCONSTANTS_HPP_
 #define ROBOTCONSTANTS_HPP_
 
+#include <i2c_t3.h>
+
+/*!
+ * \brief Constants for the wall climbing robot.
+ */
 namespace RobotConstants {
 
 /*!
@@ -22,6 +27,19 @@ enum RangeSensorPositions {
 	RS_REAR_LEFT,		///< Index of rear left sensor
 	RS_REAR_RIGHT		///< Index of rear right sensor
 };
+
+/*!
+ * \brief Enumerator mapping ToF range sensor pins to textual representations.
+ */
+enum RangeSensorPins {
+	TOF0_XSHUT = 12,		///< Pin connected to XSHUT of TOF 0
+	TOF1_XSHUT = 13,		///< Pin connected to XSHUT of TOF 1
+	TOF2_XSHUT = 14,		///< Pin connected to XSHUT of TOF 2
+	TOF3_XSHUT = 15,		///< Pin connected to XSHUT of TOF 3
+	TOF0_TOF2_I2C = I2C_PINS_18_19,		///< I2C pin set for TOF 0 and TOF 2
+	TOF1_TOF3_I2C = I2C_PINS_22_23,		///< I2C pin set for TOF 1 and TOF 3
+};
+
 
 /*!
  * \brief Enumerator matching motor indices to textual representations of the
@@ -74,7 +92,11 @@ enum SafetySwitchPins {
 	SAFES_REF = 21,    ///< Pin used to provide the safety switch reference.
 };
 
-
+/*!
+ * \brief Duty cycle of PWM signal (%) sent to the EDF MOSFET control pins that
+ * will allow the robot to hold itself to the ceiling.
+ */
+constexpr float hold_duty { 78.8 };
 
 }
 

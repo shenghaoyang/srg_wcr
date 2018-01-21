@@ -35,7 +35,7 @@ private:
 	uint8_t en;			///< L298N Enable Pin
 	float cur_pow {0.f};///< Current motor power
 
-	static constexpr uint16_t max_duty {65535}; ///< Maximum duty cycle for \ref analogWrite
+	static constexpr uint16_t max_duty {65535}; ///< Maximum duty cycle for \ref analogWrite()
 
 	void enable(void) {
 		digitalWrite(en, 1);
@@ -98,7 +98,7 @@ public:
 	/*!
 	 * \brief Set the motor power by adjusting the PWM duty cycle fed
 	 * to the motor
-	 * @param pow motor power in the range [-100, 100]
+	 * @param p motor power in the range [-100, 100]
 	 *
 	 * \note A motor power of 0.00 puts the motor into BRAKE mode.
 	 */
