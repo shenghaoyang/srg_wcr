@@ -11,22 +11,22 @@ void setup() {
 
 	/* Initialize motor drive handles */
 	EDFMotor::EDFMotor edfs[3] {
-			{ RobotConstants::EDFS_CTRL_F },
-			{ RobotConstants::EDFS_CTRL_M },
-			{ RobotConstants::EDFS_CTRL_B },
+		{ RobotConstants::EDFS_CTRL_F },
+		{ RobotConstants::EDFS_CTRL_M },
+		{ RobotConstants::EDFS_CTRL_B },
 	};
 
 	L298NMotor::L298NMotor drive_motors[2] {
-			{
-			  RobotConstants::DM_LEFT_IN0,
-			  RobotConstants::DM_LEFT_IN1,
-			  RobotConstants::DM_LEFT_EN
-			},
-			{
-			  RobotConstants::DM_RIGHT_IN0,
-			  RobotConstants::DM_RIGHT_IN1,
-			  RobotConstants::DM_RIGHT_EN
-			},
+		{
+		  RobotConstants::DM_LEFT_IN0,
+		  RobotConstants::DM_LEFT_IN1,
+		  RobotConstants::DM_LEFT_EN
+		},
+		{
+		  RobotConstants::DM_RIGHT_IN0,
+		  RobotConstants::DM_RIGHT_IN1,
+		  RobotConstants::DM_RIGHT_EN
+		},
 	};
 
 	/* Initialize sensor handles */
