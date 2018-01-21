@@ -14,7 +14,7 @@ namespace StateMachine {
 StateFunction lookup_transition(StateFunction orig_state, StateStatus status,
 		const StateTransitionTargets* table) {
 	for (const StateTransitionTargets* target_list = table;
-			target_list; target_list++) {
+			target_list->main_target; target_list++) {
 		if (target_list->main_target == orig_state) {
 			switch (status) {
 			case StateStatus::REPEAT:
